@@ -115,8 +115,13 @@ $$\psi(x, 0) = \frac{1}{(2\pi\sigma^2)^{1/4}} \exp\left(-\frac{(x-x_0)^2}{4\sigm
 
 ## Authors
 
-- **Sai Dhapte** — [@Sai-fi410](https://github.com/Sai-fi410) — Solver architecture, dashboard, visualization
-- Collaborated with teammates on physics validation and testing
+> *An idea is nothing without execution. Execution is nothing without direction.*
+
+**Sai Dhapte** — [@Sai-fi410](https://github.com/Sai-fi410)  
+The mind behind it — conceived the project, defined the scope, chose the physics, directed development, and built the complete visual layer from ground up.
+
+**Sarthak Randhave** — [@](https://github.com/)  
+The engine behind it — translated the concept into working code, architecting the solver, numerical methods, and data pipeline that makes this whole thing run.
 
 ---
 

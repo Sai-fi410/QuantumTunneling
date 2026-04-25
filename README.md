@@ -2,7 +2,6 @@
 
 > **TDSE Engine v3.0** — Time-Dependent Schrödinger Equation solver with live wavefunction and momentum dynamics.
 
-![Dashboard Screenshot](assets/screenshot.png)
 
 ---
 

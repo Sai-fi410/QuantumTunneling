@@ -13,6 +13,12 @@ Built as a personal project at the intersection of computational physics and sof
 
 ---
 
+## Demo
+
+🔗 [Live Dashboard](https://quantumtunneling-c3wt8awtokfxxffqkvz7cn.streamlit.app/)
+
+---
+
 ## Features
 
 - **Crank-Nicolson solver** — unconditionally stable, unitary time evolution

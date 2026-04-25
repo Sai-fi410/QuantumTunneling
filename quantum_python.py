@@ -444,7 +444,9 @@ if stale:
 #  RUN SOLVER
 # ─────────────────────────────────────────────────────────────────────────────
 solver_log = ""
-
+DEMO_MODE = not os.path.exists("solver.exe")
+if DEMO_MODE:
+    st.markdown('<div class="status gold">⚡ DEMO MODE — precomputed data loaded</div>', unsafe_allow_html=True)
 if run_btn:
     if not os.path.exists(EXE_PATH):
         st.markdown(

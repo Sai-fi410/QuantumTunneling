@@ -9,9 +9,7 @@ import io
 
 import plotly.graph_objects as go
 
-# ─────────────────────────────────────────────────────────────────────────────
 #  Page config  (must be first Streamlit call)
-# ─────────────────────────────────────────────────────────────────────────────
 st.set_page_config(
     page_title="QuantumLab // TDSE Engine",
     page_icon="⚛",
@@ -19,16 +17,12 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ─────────────────────────────────────────────────────────────────────────────
 #  Strict project paths — DO NOT CHANGE
-# ─────────────────────────────────────────────────────────────────────────────
 EXE_PATH  = os.path.join("solver.exe")
 POS_PATH  = os.path.join("core", "data", "output.csv")
 MOM_PATH  = os.path.join("core", "data", "momentum.csv")
 
-# ─────────────────────────────────────────────────────────────────────────────
 #  Global CSS  — Cyber-Neon / Gilded-Tech aesthetic
-# ─────────────────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;900&family=Share+Tech+Mono&family=Exo+2:wght@300;400;600&display=swap');
@@ -330,9 +324,7 @@ html, body,
 """, unsafe_allow_html=True)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 #  Helper: Plotly base layout  (shared across all charts)
-# ─────────────────────────────────────────────────────────────────────────────
 PLOTLY_BASE = dict(
     template="plotly_dark",
     paper_bgcolor="rgba(6,13,21,0.0)",
@@ -358,9 +350,7 @@ def axis_style(title="", color="#3a5a78", tick_color="#3a5a78"):
     )
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 #  SIDEBAR
-# ─────────────────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.markdown("""
         <div class="sb-logo">
@@ -424,9 +414,7 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 #  PAGE HEADER
-# ─────────────────────────────────────────────────────────────────────────────
 st.markdown("""
     <div class="page-title">Quantum Tunneling Simulator</div>
     <div class="page-sub">
@@ -440,9 +428,7 @@ if stale:
     st.markdown('<div class="status gold">⚠  PARAMETERS CHANGED — re-run to update results</div>', unsafe_allow_html=True)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 #  RUN SOLVER
-# ─────────────────────────────────────────────────────────────────────────────
 solver_log = ""
 DEMO_MODE = not os.path.exists("solver.exe")
 if DEMO_MODE:
@@ -487,10 +473,7 @@ if run_btn:
     time.sleep(0.15)
 
 
-# ─────────────────────────────────────────────────────────────────────────────
 #  LOAD DATA
-# ─────────────────────────────────────────────────────────────────────────────
-
 e_kin_live = 0.5 * k0 * k0
 e_ratio_live = e_kin_live / v0 if v0 > 0 else 0.0
 regime = "TUNNELING" if e_kin_live < v0 else "OVER-BARRIER"
@@ -521,10 +504,7 @@ if os.path.exists(POS_PATH):
     if show_momentum and os.path.exists(MOM_PATH):
         df_mom = pd.read_csv(MOM_PATH)
 
-    # ─────────────────────────────────────────────────────────────────────────
-    #  METRIC DASHBOARD
-    # ─────────────────────────────────────────────────────────────────────────
-   
+    #  METRIC DASHBOARD   
     st.markdown(f"""
     <div class="metric-grid">
         <div class="mc">
@@ -560,9 +540,7 @@ if os.path.exists(POS_PATH):
     </div>
     """, unsafe_allow_html=True)
 
-    # ─────────────────────────────────────────────────────────────────────────
     #  HELPER FUNCTIONS
-    # ─────────────────────────────────────────────────────────────────────────
     def add_barriers(fig, row=1, col=1):
         """Add red shaded barrier region(s) with V₀ label on top."""
         fig.add_vrect(
@@ -627,9 +605,7 @@ if os.path.exists(POS_PATH):
             row=row, col=col,
         )
 
-    # ─────────────────────────────────────────────────────────────────────────
     #  MAIN ANIMATION
-    # ─────────────────────────────────────────────────────────────────────────
     st.markdown('<div class="sec-label cyan">Wavefunction Dynamics  |ψ(x,t)|²</div>',
                 unsafe_allow_html=True)
 
@@ -806,9 +782,7 @@ if os.path.exists(POS_PATH):
     })
     st.markdown('</div>', unsafe_allow_html=True)
 
-    # ─────────────────────────────────────────────────────────────────────────
     #  SPARKLINE CHARTS
-    # ─────────────────────────────────────────────────────────────────────────
     tr_series = df.groupby("step").agg(
         T=("trans_prob", "first"),
         R=("refl_prob",  "first") if "refl_prob"  in df.columns else ("trans_prob", "first"),
@@ -886,18 +860,14 @@ if os.path.exists(POS_PATH):
                   "#ff2d55", "rgba(255,45,85,0.06)",
                   "Norm (%)")
 
-    # ─────────────────────────────────────────────────────────────────────────
     #  SOLVER LOG
-    # ─────────────────────────────────────────────────────────────────────────
     if solver_log:
         st.markdown('<div class="sec-label">Solver Output</div>',
                     unsafe_allow_html=True)
         st.markdown(f'<div class="log-box">{solver_log}</div>',
                     unsafe_allow_html=True)
 
-    # ─────────────────────────────────────────────────────────────────────────
     #  CSV EXPORT
-    # ─────────────────────────────────────────────────────────────────────────
     st.markdown("<br>", unsafe_allow_html=True)
     dl_col1, dl_col2, _ = st.columns([1, 1, 4])
 
@@ -918,9 +888,7 @@ if os.path.exists(POS_PATH):
                 mime="text/csv",
             )
 
-# ─────────────────────────────────────────────────────────────────────────────
 #  IDLE STATE
-# ─────────────────────────────────────────────────────────────────────────────
 else:
     st.markdown("""
         <div class="idle">
